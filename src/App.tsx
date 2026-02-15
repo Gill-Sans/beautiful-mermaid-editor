@@ -230,24 +230,6 @@ export default function App() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: r(8) }}>
-          {Object.keys(SAMPLE_DIAGRAMS).map(name => (
-            <button
-              key={name}
-              onClick={() => setCode(SAMPLE_DIAGRAMS[name])}
-              style={{
-                background: 'none', border: 'none', color: tc.uiFg, fontSize: r(11),
-                cursor: 'pointer', padding: `${r(4)} ${r(8)}`, borderRadius: r(4),
-                transition: 'all 0.15s', fontFamily: 'inherit',
-              }}
-              onMouseEnter={e => { (e.target as HTMLElement).style.background = tc.editorBorder; (e.target as HTMLElement).style.color = tc.uiFgActive }}
-              onMouseLeave={e => { (e.target as HTMLElement).style.background = 'none'; (e.target as HTMLElement).style.color = tc.uiFg }}
-            >
-              {name}
-            </button>
-          ))}
-
-          <div style={{ width: 1, height: r(20), background: tc.editorBorder, margin: `0 ${r(4)}` }} />
-
           {mode === 'svg' && (
             <button
               onClick={() => setTransparent(!transparent)}
@@ -431,9 +413,8 @@ export default function App() {
 
           <div style={{
             flex: 1, overflow: 'auto',
-            background: mode === 'svg' ? tc.bg : tc.editorBg,
-            display: 'flex', alignItems: mode !== 'svg' ? 'flex-start' : 'center',
-            justifyContent: mode !== 'svg' ? 'flex-start' : 'center',
+            background: tc.bg,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
             padding: r(24),
           }}>
             {error ? (
@@ -455,7 +436,7 @@ export default function App() {
               <pre style={{
                 fontSize: r(13), color: tc.editorFg, whiteSpace: 'pre', lineHeight: 1.4,
                 fontFamily: FONT, margin: 0, padding: r(16),
-                background: tc.isDark ? '#12121a' : '#fff',
+                background: tc.isDark ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.04)',
                 borderRadius: r(8), border: `1px solid ${tc.editorBorder}`,
                 overflow: 'auto', maxWidth: '100%', maxHeight: '100%',
               }}>
