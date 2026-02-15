@@ -146,9 +146,19 @@ export default function App() {
     }
   }, [mode, theme, transparent])
 
+  // Debounce code changes, render immediately on theme/mode/transparent changes
+  const prevSettingsRef = useRef({ mode, theme, transparent })
   useEffect(() => {
+    const prev = prevSettingsRef.current
+    const settingsChanged = prev.mode !== mode || prev.theme !== theme || prev.transparent !== transparent
+    prevSettingsRef.current = { mode, theme, transparent }
+
     clearTimeout(renderTimeoutRef.current)
-    renderTimeoutRef.current = setTimeout(() => render(code), 300)
+    if (settingsChanged) {
+      render(code)
+    } else {
+      renderTimeoutRef.current = setTimeout(() => render(code), 300)
+    }
     return () => clearTimeout(renderTimeoutRef.current)
   }, [code, render])
 
