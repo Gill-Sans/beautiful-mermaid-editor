@@ -6,6 +6,11 @@
   padding: 0;
 }
 
+html {
+  /* Scales from 16px at 1080p to ~22px at 4K, capped at both ends */
+  font-size: clamp(16px, 0.85vw + 0.45vh, 24px);
+}
+
 html, body, #root {
   height: 100%;
   overflow: hidden;
